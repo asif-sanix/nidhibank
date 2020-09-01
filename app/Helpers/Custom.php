@@ -28,4 +28,51 @@ if (!function_exists('cdn')) {
 }
 
 
+if (!function_exists('AccountSeriesGen')) {
+    function AccountSeriesGen (String $type = '',$model = '\App\User',$field = 'id') {
+        $config = \App\Model\AccountSeries::where('doc_key',$type)->first();
+
+        $data = $model::first();
+
+        if ($data) {
+            $basicFormat = $config->prefix.''.$config->start_no;
+            $startNo = ltrim($data->$field,$basicFormat);
+            $strint = $config->prefix.''.$config->start_no;
+
+            $str_len = strlen($strint);
+
+            if ($str_len < $config->formate_in_degit) {
+
+                $remanig_digit = $config->formate_in_degit-$str_len;
+
+                $remanig_digit = $remanig_digit+1;
+
+                return  $config->prefix.''.sprintf("%'.0".$remanig_digit."d\n", $config->start_no);
+            }else {
+                return $strint;
+            }
+
+        }else {
+            $strint = $config->prefix.''.$config->start_no;
+
+            $str_len = strlen($strint);
+
+            if ($str_len < $config->formate_in_degit) {
+
+                $remanig_digit = $config->formate_in_degit-$str_len;
+
+                $remanig_digit = $remanig_digit+1;
+
+
+                return  $config->prefix.''.sprintf("%'.0".$remanig_digit."d\n", $config->start_no);
+            }else {
+                return $strint;
+            }
+        }
+    }
+}
+
+
+
+
 

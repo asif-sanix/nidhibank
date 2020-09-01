@@ -30,5 +30,9 @@ class AppServiceProvider extends ServiceProvider
             return  auth('admin')->user()->hasAccess($expression);
            
         });
+
+        
+        \Form::component('category', 'components.form.category-list', ['name', 'optionsArray','defaultKey', 'attributes']);
+
     }
 }

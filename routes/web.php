@@ -117,6 +117,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::delete('paid-up-authorised-capital/{id}', 'PaidUpAuthorisedCapitalController@destroy')->name('paid-up-authorised-capital.destroy')->middleware('can:delete_paid_up_authorised_capital');
 
 
+
      Route::match(['get','patch'],'director-promoter', 'DirectorPromoterController@index')->name('director-promoter.index')->middleware('can:browse_paid_up_authorised_capital');
     Route::get('director-promoter/create', 'DirectorPromoterController@create')->name('director-promoter.create')->middleware('can:add_paid_up_authorised_capital');
     Route::get('director-promoter/{id}', 'DirectorPromoterController@show')->name('director-promoter.show')->middleware('can:read_paid_up_authorised_capital');
@@ -124,6 +125,23 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::post('director-promoter', 'DirectorPromoterController@store')->name('director-promoter.store')->middleware('can:add_paid_up_authorised_capital');
     Route::put('director-promoter/{id}', 'DirectorPromoterController@update')->name('director-promoter.update')->middleware('can:edit_paid_up_authorised_capital');
     Route::delete('director-promoter/{id}', 'DirectorPromoterController@destroy')->name('director-promoter.destroy')->middleware('can:delete_paid_up_authorised_capital');
+    
+    Route::match(['get','patch'],'member-group', 'MemberGroupController@index')->name('member-group.index')->middleware('can:browse_member_group');
+    Route::get('member-group/create', 'MemberGroupController@create')->name('member-group.create')->middleware('can:add_member_group');
+    Route::get('member-group/{member}', 'MemberGroupController@show')->name('member-group.show')->middleware('can:read_member_group');
+    Route::get('member-group/{member}/edit', 'MemberGroupController@edit')->name('member-group.edit')->middleware('can:edit_member_group');
+    Route::post('member-group', 'MemberGroupController@store')->name('member-group.store')->middleware('can:add_member_group');
+    Route::put('member-group/{member}', 'MemberGroupController@update')->name('member-group.update')->middleware('can:edit_member_group');
+    Route::delete('member-group/{member}', 'MemberGroupController@destroy')->name('member-group.destroy')->middleware('can:delete_member_group');
+    
+    Route::match(['get','patch'],'account-series', 'AccountSeriesController@index')->name('account-series.index')->middleware('can:browse_account_series');
+    Route::get('account-series/create', 'AccountSeriesController@create')->name('account-series.create')->middleware('can:add_account_series');
+    Route::get('account-series/{member}', 'AccountSeriesController@show')->name('account-series.show')->middleware('can:read_account_series');
+    Route::get('account-series/{member}/edit', 'AccountSeriesController@edit')->name('account-series.edit')->middleware('can:edit_account_series');
+    Route::post('account-series', 'AccountSeriesController@store')->name('account-series.store')->middleware('can:add_account_series');
+    Route::put('account-series/{member}', 'AccountSeriesController@update')->name('account-series.update')->middleware('can:edit_account_series');
+    Route::delete('account-series/{member}', 'AccountSeriesController@destroy')->name('account-series.destroy')->middleware('can:delete_account_series');
+
     
 });
 Auth::routes();

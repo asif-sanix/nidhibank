@@ -78,7 +78,9 @@ class PaidUpAuthorisedCapitalController extends Controller
             if($paidup->save()){ 
                 $capital = new Capital;
                 $capital->admin = Auth::guard('admin')->user()->name;
+
                 $capital->admin_id = Auth::guard('admin')->user()->id;
+
                 $capital->capital_id = $paidup->id;
                 $capital->save();
                 return redirect()->route('admin.'.request()->segment(2).'.index')->with(['class'=>'success','message'=>'Paid Up Capital/Authorised Capital Created successfully.']);
@@ -124,7 +126,9 @@ class PaidUpAuthorisedCapitalController extends Controller
                 $capital = new Capital;
                 $capital->admin = Auth::guard('admin')->user()->name;
                 $capital->capital_id = $paidup->id;
+
                 $capital->admin_id = Auth::guard('admin')->user()->id;
+
                 $capital->save();
                 return redirect()->route('admin.'.request()->segment(2).'.index')->with(['class'=>'success','message'=>'Paid Up Capital/Authorised Capital Updated Successfully.']);
             }

@@ -27,7 +27,6 @@ if (!function_exists('cdn')) {
     }
 }
 
-
 if (!function_exists('AccountSeriesGen')) {
     function AccountSeriesGen (String $type = '',$model = '\App\User',$field = 'id') {
         $config = \App\Model\AccountSeries::where('doc_key',$type)->first();

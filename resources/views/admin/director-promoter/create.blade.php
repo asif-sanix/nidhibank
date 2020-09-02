@@ -29,39 +29,13 @@
         <div class="card-body">
           {!! Form::open(['method' => 'POST', 'route' =>'admin.'.request()->segment(2).'.store', 'class' => 'form-horizontal','files'=>true]) !!}
             <div class="row">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
 
 
                     <div class="form-group{{ $errors->has('director_promoter') ? ' has-error' : '' }}">
                         {!! Form::label('director_promoter', 'Director/Promote') !!}
                         {!! Form::select('director_promoter',['Director'=>'Director','Promote'=>'Promote'], null, ['id' => 'director_promoter', 'class' => 'form-control', 'required' => 'required', 'placeholder'=>'Select Director/Promote']) !!}
                         <small class="text-danger">{{ $errors->first('director_promoter') }}</small>
-                    </div>
-
-                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        {!! Form::label('name', 'Name') !!}
-                        {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required','placeholder'=>'Name']) !!}
-                        <small class="text-danger">{{ $errors->first('name') }}</small>
-                    </div>
-
-                    <div class="form-group{{ $errors->has('address_1') ? ' has-error' : '' }}">
-                        {!! Form::label('address_1', 'Address1') !!}
-                        {!! Form::text('address_1', null, ['class' => 'form-control', 'required' => 'required','placeholder'=>'Address1']) !!}
-                        <small class="text-danger">{{ $errors->first('address_1') }}</small>
-                    </div>
-
-                     <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
-                        {!! Form::label('country', 'Country') !!}
-                        <span class="required danger">*</span>
-                        {!! Form::text('country', 'India', ['class' => 'form-control', 'placeholder' => 'Country','readonly']) !!}
-                        <small class="text-danger">{{ $errors->first('country') }}</small>
-                    </div>
-
-                    <div class="form-group {{ $errors->has('district') ? ' has-error' : '' }}">
-                        {!! Form::label('district', 'Discrict') !!}
-                        <span class="required danger">*</span>
-                        {!! Form::text('district', null, ['class' => 'form-control', 'placeholder' => 'District']) !!}
-                        <small class="text-danger">{{ $errors->first('district') }}</small>
                     </div>
 
                     <div class="form-group {{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
@@ -78,11 +52,26 @@
                     </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('occupation') ? ' has-error' : '' }}">
-                        {!! Form::label('occupation', 'Occupation') !!}
-                        {!! Form::text('occupation', null, ['class' => 'form-control', 'placeholder' => 'Occupation']) !!}
-                        <small class="text-danger">{{ $errors->first('occupation') }}</small>
+                    
+
+                    <div class="form-group{{ $errors->has('address_1') ? ' has-error' : '' }}">
+                        {!! Form::label('address_1', 'Address1') !!}
+                        {!! Form::text('address_1', null, ['class' => 'form-control', 'required' => 'required','placeholder'=>'Address1']) !!}
+                        <small class="text-danger">{{ $errors->first('address_1') }}</small>
                     </div>
+
+                     
+
+                    <div class="form-group {{ $errors->has('district') ? ' has-error' : '' }}">
+                        {!! Form::label('district', 'Discrict') !!}
+                        <span class="required danger">*</span>
+                        {!! Form::text('district', null, ['class' => 'form-control', 'placeholder' => 'District']) !!}
+                        <small class="text-danger">{{ $errors->first('district') }}</small>
+                    </div>
+
+                    
+
+                   
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         {!! Form::label('email', 'Email') !!}
@@ -103,19 +92,7 @@
                     </div>
 
 
-                    <div class="form-group {{ $errors->has('appointment_date') ? ' has-error' : '' }}">
-                        
-                        {!! Form::label('appointment_date', 'Appointment Date') !!}
-                        <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                              <span class="fa fa-calendar-o"></span>
-                            </span>
-                        </div>
-                        {!! Form::text('appointment_date', null, ['class' => 'form-control pickadate', 'placeholder' => 'Appointment Date']) !!}
-                        <small class="text-danger">{{ $errors->first('appointment_date') }}</small>
-                    </div>
-                    </div>
+                    
 
                 </div>
 
@@ -123,7 +100,7 @@
 
 
 
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div class="form-group {{ $errors->has('enrollment_date') ? ' has-error' : '' }}">
                         
                         {!! Form::label('enrollment_date', 'Enrollment Date') !!}
@@ -139,11 +116,7 @@
                     </div>
 
 
-                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-                        {!! Form::label('gender', 'Gender') !!}
-                        {!! Form::select('gender', ['Male'=>'Male','Female'=>'Female'], null, ['id' => 'gender', 'class' => 'form-control', 'required' => 'required', 'placeholder'=>'Select Gender']) !!}
-                        <small class="text-danger">{{ $errors->first('gender') }}</small>
-                    </div>
+                    
 
                     <div class="form-group{{ $errors->has('address_2') ? ' has-error' : '' }}">
                         {!! Form::label('address_2', 'Address2') !!}
@@ -151,13 +124,15 @@
                         <small class="text-danger">{{ $errors->first('address_2') }}</small>
                     </div>
 
-
-                    <div class="form-group {{ $errors->has('state') ? ' has-error' : '' }}">
-                        {!! Form::label('state', 'State') !!}
+                    <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+                        {!! Form::label('country', 'Country') !!}
                         <span class="required danger">*</span>
-                        {!! Form::select('state', App\Model\State::pluck('name','name'), null, ['id' => 'state', 'class' => 'form-control select2', 'placeholder' => 'State']) !!}
-                        <small class="text-danger">{{ $errors->first('state') }}</small>
+                        {!! Form::text('country', 'India', ['class' => 'form-control', 'placeholder' => 'Country','readonly']) !!}
+                        <small class="text-danger">{{ $errors->first('country') }}</small>
                     </div>
+
+
+                   
 
                     <div class="form-group {{ $errors->has('pincode') ? ' has-error' : '' }}">
                         {!! Form::label('pincode', 'Pincode') !!}
@@ -166,17 +141,15 @@
                         <small class="text-danger">{{ $errors->first('pincode') }}</small>
                     </div>
 
-                    <div class="form-group{{ $errors->has('marital_status') ? ' has-error' : '' }}">
-                          {!! Form::label('marital_status', 'Marital Status') !!}
-                          {!! Form::select('marital_status', ['Married'=>'Married','UnMarried'=>'UnMarried'], null, ['id' => 'marital_status', 'class' => 'form-control', 'required' => 'required', 'placeholder'=>'Select Marital Status']) !!}
-                          <small class="text-danger">{{ $errors->first('marital_status') }}</small>
-                      </div> 
 
-                      <div class="form-group{{ $errors->has('mobile_no') ? ' has-error' : '' }}">
+                    <div class="form-group{{ $errors->has('mobile_no') ? ' has-error' : '' }}">
                            {!! Form::label('mobile_no', 'Mobile No.') !!}
                            {!! Form::text('mobile_no', null, ['class' => 'form-control', 'required' => 'required','placeholder'=>'Mobile No.']) !!}
                            <small class="text-danger">{{ $errors->first('mobile_no') }}</small>
                        </div> 
+
+
+                      
 
                        <div class="form-group{{ $errors->has('pan') ? ' has-error' : '' }}">
                            {!! Form::label('pan', 'PAN') !!}
@@ -184,11 +157,7 @@
                            <small class="text-danger">{{ $errors->first('pan') }}</small>
                        </div>
 
-                       <div class="form-group{{ $errors->has('relative_name') ? ' has-error' : '' }}">
-                           {!! Form::label('relative_name', 'Relative Name') !!}
-                           {!! Form::text('relative_name', null, ['class' => 'form-control', 'placeholder' => 'Relative Name']) !!}
-                           <small class="text-danger">{{ $errors->first('relative_name') }}</small>
-                       </div>
+                      
 
 
                        <div class="form-group{{ $errors->has('din') ? ' has-error' : '' }}">
@@ -200,6 +169,71 @@
 
 
                     {!! Form::submit('Save', ['class' => 'btn btn-info pull-right']) !!}
+                </div>
+
+
+                <div class="col-md-4 col-sm-12">
+
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        {!! Form::label('name', 'Name') !!}
+                        {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required','placeholder'=>'Name']) !!}
+                        <small class="text-danger">{{ $errors->first('name') }}</small>
+                    </div>
+
+
+                    <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                        {!! Form::label('gender', 'Gender') !!}
+                        {!! Form::select('gender', ['Male'=>'Male','Female'=>'Female'], null, ['id' => 'gender', 'class' => 'form-control', 'required' => 'required', 'placeholder'=>'Select Gender']) !!}
+                        <small class="text-danger">{{ $errors->first('gender') }}</small>
+                    </div>
+
+
+                     <div class="form-group {{ $errors->has('state') ? ' has-error' : '' }}">
+                        {!! Form::label('state', 'State') !!}
+                        <span class="required danger">*</span>
+                        {!! Form::select('state', App\Model\State::pluck('name','name'), null, ['id' => 'state', 'class' => 'form-control select2', 'placeholder' => 'State']) !!}
+                        <small class="text-danger">{{ $errors->first('state') }}</small>
+                    </div>
+
+
+                     <div class="form-group{{ $errors->has('occupation') ? ' has-error' : '' }}">
+                        {!! Form::label('occupation', 'Occupation') !!}
+                        {!! Form::text('occupation', null, ['class' => 'form-control', 'placeholder' => 'Occupation']) !!}
+                        <small class="text-danger">{{ $errors->first('occupation') }}</small>
+                    </div>
+
+
+
+                    <div class="form-group{{ $errors->has('marital_status') ? ' has-error' : '' }}">
+                        {!! Form::label('marital_status', 'Marital Status') !!}
+                        {!! Form::select('marital_status', ['Married'=>'Married','UnMarried'=>'UnMarried'], null, ['id' => 'marital_status', 'class' => 'form-control', 'required' => 'required', 'placeholder'=>'Select Marital Status']) !!}
+                        <small class="text-danger">{{ $errors->first('marital_status') }}</small>
+                  </div> 
+
+
+                   <div class="form-group{{ $errors->has('relative_name') ? ' has-error' : '' }}">
+                       {!! Form::label('relative_name', 'Relative Name') !!}
+                       {!! Form::text('relative_name', null, ['class' => 'form-control', 'placeholder' => 'Relative Name']) !!}
+                       <small class="text-danger">{{ $errors->first('relative_name') }}</small>
+                   </div>
+
+
+                   <div class="form-group {{ $errors->has('appointment_date') ? ' has-error' : '' }}">
+                        
+                    {!! Form::label('appointment_date', 'Appointment Date') !!}
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <span class="fa fa-calendar-o"></span>
+                        </span>
+                    </div>
+                    {!! Form::text('appointment_date', null, ['class' => 'form-control pickadate', 'placeholder' => 'Appointment Date']) !!}
+                    <small class="text-danger">{{ $errors->first('appointment_date') }}</small>
+                </div>
+                </div>
+                    
+
+
                 </div>
 
             </div>

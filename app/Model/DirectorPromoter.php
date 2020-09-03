@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class DirectorPromoter extends Model
 {
-  	protected $dates = ['date'];
+  	protected $dates = ['enrollment_date','appointment_date','date_of_birth'];
 }

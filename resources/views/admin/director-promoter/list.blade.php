@@ -29,10 +29,11 @@
                         <thead>
                             <tr>
                                 <th>Si</th>
-                                <th>Paid Up Capital</th>
-                                <th>Authorised Capital</th>
-                                <th>Date</th>
-                                <th>Created at</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile No.</th>
+                                <th>Director/Promoter</th>
+                                <th>Appointment Date</th>
                                 @can(['edit_director_promoter','delete_director_promoter','read_director_promoter'])
                                 <th>Action</th>
                                 @endcan
@@ -73,10 +74,11 @@
                 },
                 "columns": [
                     { "data": "sn" }, 
-                    { "data": "paid_up_capital" }, 
-                    { "data": "authorised_capital" }, 
-                    { "data": "date" }, 
-                    { "data": "created_at" },
+                    { "data": "name" }, 
+                    { "data": "email" }, 
+                    { "data": "mobile_no" }, 
+                    { "data": "director_promoter" },
+                    { "data": "appointment_date" },
                     @can(['edit_director_promoter','delete_director_promoter','read_director_promoter']) 
                     {
                         "data": "action",

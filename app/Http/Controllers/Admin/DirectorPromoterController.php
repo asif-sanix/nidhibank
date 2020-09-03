@@ -20,7 +20,7 @@ class DirectorPromoterController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $datas = DirectorPromoter::orderBy('created_at','desc')->select(['id','name','membership_id','appointment_date','email','created_at','mobile_no']);
+            $datas = DirectorPromoter::orderBy('created_at','desc')->select(['id','name','membership_id','appointment_date','email','created_at','mobile_no','director_promoter']);
             $search = $request->search['value'];
 
             if ($search) {
@@ -64,24 +64,55 @@ class DirectorPromoterController extends Controller
         public function store(Request $request) {
 
             $this->validate($request,[
-                'paid_up_capital'=>'required',
-                'authorised_capital'=>'required',   
-                'date'=>'required',   
+                'director_promoter'=>'required',
+                'date_of_birth'=>'required',   
+                'address_1'=>'required',   
+                'district'=>'required',   
+                'email'=>'required',   
+                'enrollment_date'=>'required',   
+                'country'=>'required',   
+                'pincode'=>'required',   
+                'mobile_no'=>'required',   
+                'name'=>'required',   
+                'state'=>'required',   
+                'marital_status'=>'required',   
+                'appointment_date'=>'required',   
             ]);
 
-            $paidup = new DirectorPromoter;
+            $directorPromoter = new DirectorPromoter;
           
-            $paidup->paid_up_capital = $request->paid_up_capital;
-            $paidup->authorised_capital = $request->authorised_capital;
-            $paidup->date = Carbon::parse($request->date)->format('Y-m-d');
+            $directorPromoter->director_promoter = $request->director_promoter;
+            $directorPromoter->address_1 = $request->address_1;
+            $directorPromoter->district = $request->district;
+            $directorPromoter->email = $request->email;
+            $directorPromoter->aadhar_no = $request->aadhar_no;
+            $directorPromoter->mother_name = $request->mother_name;
+            $directorPromoter->address_2 = $request->address_2;
+            $directorPromoter->country = $request->country;
+            $directorPromoter->pincode = $request->pincode;
+            $directorPromoter->mobile_no = $request->mobile_no;
+            $directorPromoter->pan = $request->pan;
+            $directorPromoter->din = $request->din;
+            $directorPromoter->name = $request->name;
+            $directorPromoter->gender = $request->gender;
+            $directorPromoter->state = $request->state;
+            $directorPromoter->occupation = $request->occupation;
+            $directorPromoter->marital_status = $request->marital_status;
+            $directorPromoter->relative_name = $request->relative_name;
+            $directorPromoter->bank_name = $request->bank_name;
+            $directorPromoter->ifs_code = $request->ifs_code;
+            $directorPromoter->bank_address = $request->bank_address;
+            $directorPromoter->bank_account = $request->bank_account;
+            $directorPromoter->account_type = $request->account_type;
 
-            if($paidup->save()){ 
-                $capital = new Capital;
-                $capital->admin = Auth::guard('admin')->user()->name;
-                $capital->admin_id = Auth::guard('admin')->user()->id;
-                $capital->capital_id = $paidup->id;
-                $capital->save();
-                return redirect()->route('admin.'.request()->segment(2).'.index')->with(['class'=>'success','message'=>'Paid Up Capital/Authorised Capital Created successfully.']);
+
+            $directorPromoter->date_of_birth = Carbon::parse($request->date_of_birth)->format('Y-m-d');
+            $directorPromoter->enrollment_date = Carbon::parse($request->enrollment_date)->format('Y-m-d');
+            $directorPromoter->appointment_date = Carbon::parse($request->appointment_date)->format('Y-m-d');
+
+            if($directorPromoter->save()){ 
+
+                return redirect()->route('admin.'.request()->segment(2).'.index')->with(['class'=>'success','message'=>'Data Save Successfully.']);
             }
 
             return redirect()->back()->with(['class'=>'error','message'=>'Whoops, looks like something went wrong ! Try again ...']);
@@ -95,8 +126,8 @@ class DirectorPromoterController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $capital = DirectorPromoter::find($id);
-        return view('admin.director-promoter.edit', compact('capital')); 
+        $directorPromoter = DirectorPromoter::find($id);
+        return view('admin.director-promoter.edit', compact('directorPromoter')); 
     }
 
     /**
@@ -109,24 +140,55 @@ class DirectorPromoterController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-                'paid_up_capital'=>'required',
-                'authorised_capital'=>'required',   
-                'date'=>'required',   
+                'director_promoter'=>'required',
+                'date_of_birth'=>'required',   
+                'address_1'=>'required',   
+                'district'=>'required',   
+                'email'=>'required',   
+                'enrollment_date'=>'required',   
+                'country'=>'required',   
+                'pincode'=>'required',   
+                'mobile_no'=>'required',   
+                'name'=>'required',   
+                'state'=>'required',   
+                'marital_status'=>'required',   
+                'appointment_date'=>'required',   
             ]);
 
-            $paidup = DirectorPromoter::find($id);
+            $directorPromoter = DirectorPromoter::find($id);
           
-            $paidup->paid_up_capital = $request->paid_up_capital;
-            $paidup->authorised_capital = $request->authorised_capital;
-            $paidup->date = Carbon::parse($request->date)->format('Y-m-d');
+            $directorPromoter->director_promoter = $request->director_promoter;
+            $directorPromoter->address_1 = $request->address_1;
+            $directorPromoter->district = $request->district;
+            $directorPromoter->email = $request->email;
+            $directorPromoter->aadhar_no = $request->aadhar_no;
+            $directorPromoter->mother_name = $request->mother_name;
+            $directorPromoter->address_2 = $request->address_2;
+            $directorPromoter->country = $request->country;
+            $directorPromoter->pincode = $request->pincode;
+            $directorPromoter->mobile_no = $request->mobile_no;
+            $directorPromoter->pan = $request->pan;
+            $directorPromoter->din = $request->din;
+            $directorPromoter->name = $request->name;
+            $directorPromoter->gender = $request->gender;
+            $directorPromoter->state = $request->state;
+            $directorPromoter->occupation = $request->occupation;
+            $directorPromoter->marital_status = $request->marital_status;
+            $directorPromoter->relative_name = $request->relative_name;
+            $directorPromoter->bank_name = $request->bank_name;
+            $directorPromoter->ifs_code = $request->ifs_code;
+            $directorPromoter->bank_address = $request->bank_address;
+            $directorPromoter->bank_account = $request->bank_account;
+            $directorPromoter->account_type = $request->account_type;
 
-            if($paidup->save()){ 
-                $capital = new Capital;
-                $capital->admin = Auth::guard('admin')->user()->name;
-                $capital->capital_id = $paidup->id;
-                $capital->admin_id = Auth::guard('admin')->user()->id;
-                $capital->save();
-                return redirect()->route('admin.'.request()->segment(2).'.index')->with(['class'=>'success','message'=>'Paid Up Capital/Authorised Capital Updated Successfully.']);
+
+            $directorPromoter->date_of_birth = Carbon::parse($request->date_of_birth)->format('Y-m-d');
+            $directorPromoter->enrollment_date = Carbon::parse($request->enrollment_date)->format('Y-m-d');
+            $directorPromoter->appointment_date = Carbon::parse($request->appointment_date)->format('Y-m-d');
+
+            if($directorPromoter->save()){ 
+
+                return redirect()->route('admin.'.request()->segment(2).'.index')->with(['class'=>'success','message'=>'Data Save Successfully.']);
             }
 
             return redirect()->back()->with(['class'=>'error','message'=>'Whoops, looks like something went wrong ! Try again ...']);

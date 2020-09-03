@@ -359,7 +359,7 @@ footer.footer-dark {
             color: #dcdcdc;
             background: transparent; }
             .main-menu.menu-dark .navigation > li ul li > a {
-              padding: 10px 18px 10px 50px; }
+              padding: 10px 18px 10px 30px; }
           .main-menu.menu-dark .navigation > li ul .has-sub:not(.open) > ul {
             display: none; }
           .main-menu.menu-dark .navigation > li ul .open > a {

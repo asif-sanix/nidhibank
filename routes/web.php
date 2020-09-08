@@ -123,6 +123,15 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::post('member-group', 'MemberGroupController@store')->name('member-group.store')->middleware('can:add_member_group');
     Route::put('member-group/{member}', 'MemberGroupController@update')->name('member-group.update')->middleware('can:edit_member_group');
     Route::delete('member-group/{member}', 'MemberGroupController@destroy')->name('member-group.destroy')->middleware('can:delete_member_group');
+
+
+    Route::match(['get','patch'],'member', 'MemberController@index')->name('member.index')->middleware('can:browse_member');
+    Route::get('member/create', 'MemberController@create')->name('member.create')->middleware('can:add_member');
+    Route::get('member/{member}', 'MemberController@show')->name('member.show')->middleware('can:read_member');
+    Route::get('member/{member}/edit', 'MemberController@edit')->name('member.edit')->middleware('can:edit_member');
+    Route::post('member', 'MemberController@store')->name('member.store')->middleware('can:add_member');
+    Route::put('member/{member}', 'MemberController@update')->name('member.update')->middleware('can:edit_member');
+    Route::delete('member/{member}', 'MemberController@destroy')->name('member.destroy')->middleware('can:delete_member');
     
     Route::match(['get','patch'],'account-series', 'AccountSeriesController@index')->name('account-series.index')->middleware('can:browse_account_series');
     Route::get('account-series/create', 'AccountSeriesController@create')->name('account-series.create')->middleware('can:add_account_series');
@@ -140,6 +149,18 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::post('director-promoter', 'DirectorPromoterController@store')->name('director-promoter.store')->middleware('can:add_director_promoter');
     Route::put('director-promoter/{id}', 'DirectorPromoterController@update')->name('director-promoter.update')->middleware('can:edit_director_promoter');
     Route::delete('director-promoter/{id}', 'DirectorPromoterController@destroy')->name('director-promoter.destroy')->middleware('can:delete_director_promoter');
+
+
+    Route::match(['get','patch'],'form', 'FormController@index')->name('form.index')->middleware('can:browse_form');
+    Route::get('form/create', 'FormController@create')->name('form.create')->middleware('can:add_form');
+    Route::get('form/{form}', 'FormController@show')->name('form.show')->middleware('can:read_form');
+    Route::get('form/{form}/edit', 'FormController@edit')->name('form.edit')->middleware('can:edit_form');
+    Route::post('form', 'FormController@store')->name('form.store')->middleware('can:add_form');
+    Route::put('form/{form}', 'FormController@update')->name('form.update')->middleware('can:edit_form');
+    Route::delete('form/{form}', 'FormController@destroy')->name('form.destroy')->middleware('can:delete_form');
+
+
+
     
 });
 Auth::routes();

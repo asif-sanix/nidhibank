@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\DirectorPromoter\DirectorPromoterCollection;
 use App\Model\Capital;
-use App\Model\DirectorPromoter;
+use App\Model\Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +20,7 @@ class DirectorPromoterController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $datas = DirectorPromoter::orderBy('created_at','desc')->select(['id','name','membership_id','appointment_date','email','created_at','mobile_no','director_promoter']);
+            $datas = Member::orderBy('created_at','desc')->where('user_type', 1)->select(['id','name','membership_id','appointment_date','email','created_at','mobile_no','director_promoter']);
             $search = $request->search['value'];
 
             if ($search) {
@@ -52,7 +52,7 @@ class DirectorPromoterController extends Controller
      */
     public function show(Request $request, $id )
     {   
-       $capital = DirectorPromoter::find($id);
+       $capital = Member::find($id);
         return view('admin.director-promoter.view', compact('capital')); 
     }
     /**
@@ -79,8 +79,8 @@ class DirectorPromoterController extends Controller
                 'appointment_date'=>'required',   
             ]);
 
-            $directorPromoter = new DirectorPromoter;
-          
+            $directorPromoter = new Member;
+            $directorPromoter->user_type = 1;
             $directorPromoter->director_promoter = $request->director_promoter;
             $directorPromoter->address_1 = $request->address_1;
             $directorPromoter->district = $request->district;
@@ -126,7 +126,7 @@ class DirectorPromoterController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $directorPromoter = DirectorPromoter::find($id);
+        $directorPromoter = Member::find($id);
         return view('admin.director-promoter.edit', compact('directorPromoter')); 
     }
 
@@ -155,8 +155,8 @@ class DirectorPromoterController extends Controller
                 'appointment_date'=>'required',   
             ]);
 
-            $directorPromoter = DirectorPromoter::find($id);
-          
+            $directorPromoter = Member::find($id);
+            $directorPromoter->user_type = 1;
             $directorPromoter->director_promoter = $request->director_promoter;
             $directorPromoter->address_1 = $request->address_1;
             $directorPromoter->district = $request->district;
@@ -202,7 +202,7 @@ class DirectorPromoterController extends Controller
      */
     public function destroy($id)
     {
-        if(DirectorPromoter::where('id',$id)->delete()){
+        if(Member::where('id',$id)->delete()){
             
             return response()->json(['message'=>'Paid Up Capital/Authorised Capital  Deleted successfully ...', 'class'=>'success']);  
         }

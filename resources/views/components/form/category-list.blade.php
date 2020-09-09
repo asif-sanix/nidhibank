@@ -1,18 +1,9 @@
-<div class="form-group">
-    <select class="form-control" name="{{ $name }}">
-	    @foreach($optionsArray as $categories)
-		    @if(count($categories->childs))
-                <optgroup label="{{ $categories->name }}">
-		            @foreach($categories->childs as $category)
-		                <option value="{{ $category->id }}">{{ $category->name }}</option>
-		            @endforeach
-		        </optgroup>		
-		    @else
-
-		    	
-            @endif
-	        
-	    @endforeach
-	</select>
-</div>
-
+<select class="form-control" name="{{ $name }}">
+	<option value="">&nbsp;</option>
+	@foreach ($optionsArray->where('parent_id',0) as $category)
+		<option value="{{ $category->id }}">{{ $category->name }}</option>
+		@if(count($category->childs))
+			@include('components.form.subCategoryList', ['categories'=>$category->childs,'dashes'=>'-'])
+		@endif
+	@endforeach
+</select>

@@ -160,6 +160,15 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::delete('form/{form}', 'FormController@destroy')->name('form.destroy')->middleware('can:delete_form');
 
 
+    Route::match(['get','patch'],'un-encumbered-deposit', 'UnEncumberedDepositController@index')->name('un-encumbered-deposit.index')->middleware('can:browse_un_encumbered_deposit');
+    Route::get('un-encumbered-deposit/create', 'UnEncumberedDepositController@create')->name('un-encumbered-deposit.create')->middleware('can:add_un_encumbered_deposit');
+    Route::get('un-encumbered-deposit/{id}', 'UnEncumberedDepositController@show')->name('un-encumbered-deposit.show')->middleware('can:read_un_encumbered_deposit');
+    Route::get('un-encumbered-deposit/{id}/edit', 'UnEncumberedDepositController@edit')->name('un-encumbered-deposit.edit')->middleware('can:edit_un_encumbered_deposit');
+    Route::post('un-encumbered-deposit', 'UnEncumberedDepositController@store')->name('un-encumbered-deposit.store')->middleware('can:add_un_encumbered_deposit');
+    Route::put('un-encumbered-deposit/{id}', 'UnEncumberedDepositController@update')->name('un-encumbered-deposit.update')->middleware('can:edit_un_encumbered_deposit');
+    Route::delete('un-encumbered-deposit/{id}', 'UnEncumberedDepositController@destroy')->name('un-encumbered-deposit.destroy')->middleware('can:delete_un_encumbered_deposit');
+
+
 
     
 });

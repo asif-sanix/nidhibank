@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
@@ -169,9 +166,35 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::delete('un-encumbered-deposit/{id}', 'UnEncumberedDepositController@destroy')->name('un-encumbered-deposit.destroy')->middleware('can:delete_un_encumbered_deposit');
 
 
+    Route::match(['get','patch'],'saving-account-scheme', 'SavingAccountSchemeController@index')->name('saving-account-scheme.index')->middleware('can:browse_saving_account_scheme');
+    Route::get('saving-account-scheme/create', 'SavingAccountSchemeController@create')->name('saving-account-scheme.create')->middleware('can:add_saving_account_scheme');
+    Route::get('saving-account-scheme/{scheme}', 'SavingAccountSchemeController@show')->name('saving-account-scheme.show')->middleware('can:read_saving_account_scheme');
+    Route::get('saving-account-scheme/{scheme}/edit', 'SavingAccountSchemeController@edit')->name('saving-account-scheme.edit')->middleware('can:edit_saving_account_scheme');
+    Route::post('saving-account-scheme', 'SavingAccountSchemeController@store')->name('saving-account-scheme.store')->middleware('can:add_saving_account_scheme');
+    Route::put('saving-account-scheme/{scheme}', 'SavingAccountSchemeController@update')->name('saving-account-scheme.update')->middleware('can:edit_saving_account_scheme');
+    Route::delete('saving-account-scheme/{scheme}', 'SavingAccountSchemeController@destroy')->name('saving-account-scheme.destroy')->middleware('can:delete_saving_account_scheme');
+
+
+    Route::match(['get','patch'],'saving-account', 'SavingAccountController@index')->name('saving-account.index')->middleware('can:browse_saving_account');
+    Route::get('saving-account/create', 'SavingAccountController@create')->name('saving-account.create')->middleware('can:add_saving_account');
+    Route::get('saving-account/{saving-account}', 'SavingAccountController@show')->name('saving-account.show')->middleware('can:read_saving_account');
+    Route::get('saving-account/{saving-account}/edit', 'SavingAccountController@edit')->name('saving-account.edit')->middleware('can:edit_saving_account');
+    Route::post('saving-account', 'SavingAccountController@store')->name('saving-account.store')->middleware('can:add_saving_account');
+    Route::put('saving-account/{saving-account}', 'SavingAccountController@update')->name('saving-account.update')->middleware('can:edit_saving_account');
+    Route::delete('saving-account/{saving-account}', 'SavingAccountController@destroy')->name('saving-account.destroy')->middleware('can:delete_saving_account');
+
+    Route::match(['get','patch'],'saving-account-application', 'SavingAccountApplicationController@index')->name('saving-account-application.index')->middleware('can:browse_saving_account_application');
+    Route::get('saving-account-application/create', 'SavingAccountapplicationController@create')->name('saving-account-application.create')->middleware('can:add_saving_account_application');
+    Route::get('saving-account-application/{saving-account-application}', 'SavingAccountapplicationController@show')->name('saving-account-application.show')->middleware('can:read_saving_account_application');
+    Route::get('saving-account-application/{saving-account-application}/edit', 'SavingAccountapplicationController@edit')->name('saving-account-application.edit')->middleware('can:edit_saving_account_application');
+    Route::post('saving-account-application', 'SavingAccountapplicationController@store')->name('saving-account-application.store')->middleware('can:add_saving_account_application');
+    Route::put('saving-account-application/{saving-account-application}', 'SavingAccountapplicationController@update')->name('saving-account-application.update')->middleware('can:edit_saving_account_application');
+    Route::delete('saving-account-application/{saving-account-application}', 'SavingAccountapplicationController@destroy')->name('saving-account-application.destroy')->middleware('can:delete_saving_account_application');
+
+
 
     
 });
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

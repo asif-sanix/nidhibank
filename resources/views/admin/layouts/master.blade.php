@@ -617,6 +617,33 @@ console.log(data)
 
   </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.select2').select2();
+});
+</script>
+
+  <script type="text/javascript">
+      
+      $(document).ready(function() {
+    $('.get_member').select2({
+        delay : 200,
+        ajax: {
+            url: '{{ route('admin.member.list') }}',
+            dataType: 'json',
+            cache: true,
+            data: function(params) {
+              return {
+                  term: params.term || '',
+                  page: params.page || 1
+              }
+          },
+        }
+    });
+});
+  </script>
+
+
   @stack('scripts')
 
 </body>

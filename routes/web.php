@@ -48,6 +48,15 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin.guest','prefix'=>'ad
 
 Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','prefix'=>'admin'], function() { 
 
+    // Coomon routes
+
+    Route::get('common/member/list', 'CommonController@getMemberList')->name('member.list');
+
+
+
+
+
+
 
     Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
     Route::post('logout', 'Auth\LoginController@logout')->name('logout.post');
@@ -191,6 +200,23 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::put('saving-account-application/{saving-account-application}', 'SavingAccountapplicationController@update')->name('saving-account-application.update')->middleware('can:edit_saving_account_application');
     Route::delete('saving-account-application/{saving-account-application}', 'SavingAccountapplicationController@destroy')->name('saving-account-application.destroy')->middleware('can:delete_saving_account_application');
 
+    Route::match(['get','patch'],'agent', 'AgentController@index')->name('agent.index')->middleware('can:browse_agent');
+    Route::get('agent/create', 'AgentController@create')->name('agent.create')->middleware('can:add_agent');
+    Route::get('agent/{agent}', 'AgentController@show')->name('agent.show')->middleware('can:read_agent');
+    Route::get('agent/{agent}/edit', 'AgentController@edit')->name('agent.edit')->middleware('can:edit_agent');
+    Route::post('agent', 'AgentController@store')->name('agent.store')->middleware('can:add_agent');
+    Route::put('agent/{agent}', 'AgentController@update')->name('agent.update')->middleware('can:edit_agent');
+    Route::delete('agent/{agent}', 'AgentController@destroy')->name('agent.destroy')->middleware('can:delete_agent');
+
+
+
+    Route::match(['get','patch'],'agent-ranking', 'AgentRankingController@index')->name('agent-ranking.index')->middleware('can:browse_agent_ranking');
+    Route::get('agent-ranking/create', 'AgentRankingController@create')->name('agent-ranking.create')->middleware('can:add_agent_ranking');
+    Route::get('agent-ranking/{agent_rankings}', 'AgentRankingController@show')->name('agent-ranking.show')->middleware('can:read_agent_ranking');
+    Route::get('agent-ranking/{agent_rankings}/edit', 'AgentRankingController@edit')->name('agent-ranking.edit')->middleware('can:edit_agent_ranking');
+    Route::post('agent-ranking', 'AgentRankingController@store')->name('agent-ranking.store')->middleware('can:add_agent_ranking');
+    Route::put('agent-ranking/{agent_rankings}', 'AgentRankingController@update')->name('agent-ranking.update')->middleware('can:edit_agent_ranking');
+    Route::delete('agent-ranking/{agent_rankings}', 'AgentRankingController@destroy')->name('agent-ranking.destroy')->middleware('can:delete_agent_ranking');
 
 
     

@@ -228,6 +228,14 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::put('agent-ranking/{agent_rankings}', 'AgentRankingController@update')->name('agent-ranking.update')->middleware('can:edit_agent_ranking');
     Route::delete('agent-ranking/{agent_rankings}', 'AgentRankingController@destroy')->name('agent-ranking.destroy')->middleware('can:delete_agent_ranking');
 
+    Route::match(['get','patch'],'loan-account', 'LoanAccountController@index')->name('loan-account.index')->middleware('can:browse_loan_account');
+    Route::get('loan-account/create', 'LoanAccountController@create')->name('loan-account.create')->middleware('can:add_loan_account');
+    Route::get('loan-account/{loan_accounts}', 'LoanAccountController@show')->name('loan-account.show')->middleware('can:read_loan_account');
+    Route::get('loan-account/{loan_accounts}/edit', 'LoanAccountController@edit')->name('loan-account.edit')->middleware('can:edit_loan_account');
+    Route::post('loan-account', 'LoanAccountController@store')->name('loan-account.store')->middleware('can:add_loan_account');
+    Route::put('loan-account/{loan_accounts}', 'LoanAccountController@update')->name('loan-account.update')->middleware('can:edit_loan_account');
+    Route::delete('loan-account/{loan_accounts}', 'LoanAccountController@destroy')->name('loan-account.destroy')->middleware('can:delete_loan_account');
+
 
 
     Route::match(['get','patch'],'recurring-deposit-application', 'RecurringDepositApplicationController@index')->name('recurring-deposit-application.index')->middleware('can:browse_recurring_deposit_application');

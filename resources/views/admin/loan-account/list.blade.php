@@ -11,7 +11,7 @@
     <div class="content-header-right col-md-6 col-12">
       <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
         <div class="btn-group" role="group">
-            @can('add_agent_ranking')
+            @can('add_loan_account')
                 <a href="{{ route('admin.'.request()->segment(2).'.create') }}" class="btn btn-primary btn-sm">Deposit Loan Account Add</a>
             @endcan
        </div>
@@ -29,11 +29,15 @@
                         <thead>
                             <tr>
                                 <th>Si</th>
-                                <th>Rank</th>
-                                <th>Rank Name</th>
+                                <th>Account Number</th>
+                                <th>Account Date</th>
+                                <th>Member Name</th>
+                                <th>Loan Amount</th>
+                                <th>Schema Name</th>
+                                <th>Associate</th>
                                 <th>Status</th>
                                 <th>Created at</th>
-                                @can(['edit_agent_ranking','delete_agent_ranking','read_agent_ranking'])
+                                @can(['edit_loan_account','delete_loan_account','read_loan_account'])
                                 <th>Action</th>
                                 @endcan
                             </tr>
@@ -73,8 +77,12 @@
                 },
                 "columns": [
                     { "data": "sn" }, 
-                    { "data": "rank" }, 
-                    { "data": "rank_name" }, 
+                    { "data": "account_number" }, 
+                    { "data": "account_date" }, 
+                    { "data": "member_name" }, 
+                    { "data": "loan_amount" }, 
+                    { "data": "schema_name" }, 
+                    { "data": "associate" }, 
                     { "data": "status" }, 
                     { "data": "created_at" }, 
                     {
@@ -83,17 +91,17 @@
                             if (type === 'display') {
                                 var btn = '';
 
-                                @can(['edit_agent_ranking','delete_agent_ranking','read_agent_ranking'])
+                                @can(['edit_loan_account','delete_loan_account','read_loan_account'])
 
-                                    @can('read_agent_ranking')
+                                    @can('read_loan_account')
                                         btn += '<a class="btn btn-social-icon btn-outline-success btn-xs" href="{{ request()->url() }}/' + row['id'] + '"><i class="fa fa-eye"></i></a>&nbsp;';
                                     @endcan
 
-                                    @can('edit_agent_ranking')
+                                    @can('edit_loan_account')
                                         btn+='<a class="btn btn-xs btn-social-icon btn-outline-info" href="'+window.location.href+'/'+row['id']+'/edit"><i class="fa fa-pencil-square-o"></i></a> ';
                                     @endcan
                                     
-                                    @can('delete_agent_ranking')
+                                    @can('delete_loan_account')
                                         btn += '<button type="button" onclick="deleteAjax(\''+window.location.href+'/'+row['id']+'\')" class="btn btn-xs btn-social-icon btn-outline-danger"><i class="fa fa-trash"></i></button>&nbsp;';
                                     @endcan
 

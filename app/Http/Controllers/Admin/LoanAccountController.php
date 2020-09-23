@@ -40,7 +40,7 @@ class LoanAccountController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.loan-account.create');
     }
 
     /**
@@ -62,7 +62,8 @@ class LoanAccountController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = LoanAccount::find($id);
+        return view('admin.loan-account.view',compact('data'));
     }
 
     /**
@@ -73,7 +74,9 @@ class LoanAccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = LoanAccount::find($id);
+
+        return view('admin.loan-account.edit',compact('data'));
     }
 
     /**
@@ -96,6 +99,14 @@ class LoanAccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = LoanAccount::find($id);
+
+        if ($data) {
+            $data->delete();
+
+            return response()->json(['message'=>'Row  Deleted successfully ...', 'class'=>'success']);
+        }
+
+        return response()->json(['message'=>'Whoops, looks like something went wrong ! Try again ...', 'class'=>'error']);
     }
 }

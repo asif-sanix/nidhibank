@@ -22,7 +22,7 @@
 
             @can('edit_paid_up_authorised_capital')
 
-                <a href="{{ route('admin.'.request()->segment(2).'.edit',$capital->id) }}" class="btn btn-primary btn-sm">Edit Paid Up Capital</a>
+                <a href="{{ route('admin.'.request()->segment(2).'.edit',$data->id) }}" class="btn btn-primary btn-sm">Edit Paid Up Capital</a>
 
             @endcan
 
@@ -46,38 +46,18 @@
                 <tbody>
                     <tr>
                         <td style="width:30%;">Paid up Capital</td>
-                        <td>{{$capital->paid_up_capital??'N/A'}}</td>
+                        <td>{{$data->paid_up_capital??'N/A'}}</td>
                     </tr>
 
 
                     <tr>
                         <td style="width:30%;">Authorised Capital</td>
-                        <td>{{$capital->authorised_capital??'N/A'}}</td>
+                        <td>{{$data->authorised_capital??'N/A'}}</td>
                     </tr>
 
                     <tr>
                         <td style="width:30%;">Date</td>
-                        <td>{{$capital->date->format('d F Y')}}</td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:30%;">Created By</td>
-                        <td>{{App\Model\Capital::where('capital_id', $capital->id)->first()->value('admin')}}</td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:30%;">Created On</td>
-                        <td>{{App\Model\Capital::where('capital_id', $capital->id)->first()->value('created_at')->format('d F Y')}}</td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:30%;">Modified By</td>
-                        <td>{{App\Model\Capital::where('capital_id', $capital->id)->latest()->value('admin')}}</td>
-                    </tr>
-
-                    <tr>
-                        <td style="width:30%;">Modified On</td>
-                        <td>{{App\Model\Capital::where('capital_id', $capital->id)->latest()->value('created_at')->format('d F Y')}}</td>
+                        <td>{{$data->created_at->format('d F Y')}}</td>
                     </tr>
 
                 </tbody>

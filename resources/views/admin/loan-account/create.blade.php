@@ -12,14 +12,14 @@
 <div class="content-header row">
 
     <div class="content-header-left col-md-6 col-12 mb-2">
-      <h5 class="content-header-title mb-0">Agent Ranking</h5>
+      <h5 class="content-header-title mb-0">Loan Account</h5>
     </div>
 
     <div class="content-header-right col-md-6 col-12">
       <div class="btn-group float-md-right" role="group" aria-label="Button group with nested dropdown">
         <div class="btn-group" role="group">
             @can('add_agent_ranking')
-                <a href="{{ route('admin.'.request()->segment(2).'.create') }}" class="btn btn-primary btn-sm">Agent Add Ranking</a>
+                <a href="{{ route('admin.'.request()->segment(2).'.create') }}" class="btn btn-primary btn-sm">Add Loan Account</a>
             @endcan
        </div>
     </div>

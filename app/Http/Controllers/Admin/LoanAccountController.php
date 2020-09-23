@@ -18,7 +18,7 @@ class LoanAccountController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $datas = LoanAccount::orderBy('created_at','desc')->select(['id','rank','rank_name','created_at','status']);
+            $datas = LoanAccount::orderBy('created_at','desc')->select(['id','type','account_number','created_at','status','account_date','member_name','loan_amount','schema_name','associate']);
             $search = $request->search['value'];
 
             if ($search) {

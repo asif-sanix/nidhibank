@@ -51,6 +51,9 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     // Coomon routes
 
     Route::get('common/member/list', 'CommonController@getMemberList')->name('member.list');
+    Route::get('common/member/{id}', 'CommonController@getMemberSingle')->name('member.single');
+    Route::get('common/scheme/{id}', 'CommonController@schemeDetails')->name('scheme.single');
+    Route::get('common/agent/list', 'CommonController@getAgentList')->name('agent.list');
 
 
 
@@ -186,19 +189,26 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
 
     Route::match(['get','patch'],'saving-account', 'SavingAccountController@index')->name('saving-account.index')->middleware('can:browse_saving_account');
     Route::get('saving-account/create', 'SavingAccountController@create')->name('saving-account.create')->middleware('can:add_saving_account');
-    Route::get('saving-account/{saving-account}', 'SavingAccountController@show')->name('saving-account.show')->middleware('can:read_saving_account');
+    Route::get('saving-account/{saving_account}', 'SavingAccountController@show')->name('saving-account.show')->middleware('can:read_saving_account');
     Route::get('saving-account/{saving-account}/edit', 'SavingAccountController@edit')->name('saving-account.edit')->middleware('can:edit_saving_account');
     Route::post('saving-account', 'SavingAccountController@store')->name('saving-account.store')->middleware('can:add_saving_account');
     Route::put('saving-account/{saving-account}', 'SavingAccountController@update')->name('saving-account.update')->middleware('can:edit_saving_account');
     Route::delete('saving-account/{saving-account}', 'SavingAccountController@destroy')->name('saving-account.destroy')->middleware('can:delete_saving_account');
 
+
+
+    ///Accounts Details
+
     Route::match(['get','patch'],'saving-account-application', 'SavingAccountApplicationController@index')->name('saving-account-application.index')->middleware('can:browse_saving_account_application');
     Route::get('saving-account-application/create', 'SavingAccountapplicationController@create')->name('saving-account-application.create')->middleware('can:add_saving_account_application');
-    Route::get('saving-account-application/{saving-account-application}', 'SavingAccountapplicationController@show')->name('saving-account-application.show')->middleware('can:read_saving_account_application');
-    Route::get('saving-account-application/{saving-account-application}/edit', 'SavingAccountapplicationController@edit')->name('saving-account-application.edit')->middleware('can:edit_saving_account_application');
+    Route::get('saving-account-application/{application}', 'SavingAccountapplicationController@show')->name('saving-account-application.show')->middleware('can:read_saving_account_application');
+    Route::get('saving-account-application/{application}/edit', 'SavingAccountapplicationController@edit')->name('saving-account-application.edit')->middleware('can:edit_saving_account_application');
     Route::post('saving-account-application', 'SavingAccountapplicationController@store')->name('saving-account-application.store')->middleware('can:add_saving_account_application');
-    Route::put('saving-account-application/{saving-account-application}', 'SavingAccountapplicationController@update')->name('saving-account-application.update')->middleware('can:edit_saving_account_application');
-    Route::delete('saving-account-application/{saving-account-application}', 'SavingAccountapplicationController@destroy')->name('saving-account-application.destroy')->middleware('can:delete_saving_account_application');
+    Route::put('saving-account-application/{application}', 'SavingAccountapplicationController@update')->name('saving-account-application.update')->middleware('can:edit_saving_account_application');
+    Route::delete('saving-account-application/{application}', 'SavingAccountapplicationController@destroy')->name('saving-account-application.destroy')->middleware('can:delete_saving_account_application');
+    Route::put('saving-account-application/change-status/status', 'SavingAccountapplicationController@changeStatus')->name('saving-account-application.changeStatus')->middleware('can:status_saving_account_application');
+
+
 
     Route::match(['get','patch'],'agent', 'AgentController@index')->name('agent.index')->middleware('can:browse_agent');
     Route::get('agent/create', 'AgentController@create')->name('agent.create')->middleware('can:add_agent');
@@ -217,6 +227,105 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','as' => 'admin.','p
     Route::post('agent-ranking', 'AgentRankingController@store')->name('agent-ranking.store')->middleware('can:add_agent_ranking');
     Route::put('agent-ranking/{agent_rankings}', 'AgentRankingController@update')->name('agent-ranking.update')->middleware('can:edit_agent_ranking');
     Route::delete('agent-ranking/{agent_rankings}', 'AgentRankingController@destroy')->name('agent-ranking.destroy')->middleware('can:delete_agent_ranking');
+
+
+
+    Route::match(['get','patch'],'recurring-deposit-application', 'RecurringDepositApplicationController@index')->name('recurring-deposit-application.index')->middleware('can:browse_recurring_deposit_application');
+    Route::get('recurring-deposit-application/create', 'RecurringDepositApplicationController@create')->name('recurring-deposit-application.create')->middleware('can:add_recurring_deposit_application');
+    Route::get('recurring-deposit-application/{application}', 'RecurringDepositApplicationController@show')->name('recurring-deposit-application.show')->middleware('can:read_recurring_deposit_application');
+    Route::get('recurring-deposit-application/{application}/edit', 'RecurringDepositApplicationController@edit')->name('recurring-deposit-application.edit')->middleware('can:edit_recurring_deposit_application');
+    Route::post('recurring-deposit-application', 'RecurringDepositApplicationController@store')->name('recurring-deposit-application.store')->middleware('can:add_recurring_deposit_application');
+    Route::put('recurring-deposit-application/{application}', 'RecurringDepositApplicationController@update')->name('recurring-deposit-application.update')->middleware('can:edit_recurring_deposit_application');
+    Route::delete('recurring-deposit-application/{application}', 'RecurringDepositApplicationController@destroy')->name('recurring-deposit-application.destroy')->middleware('can:delete_recurring_deposit_application');
+    Route::put('recurring-deposit-application/change-status/status', 'RecurringDepositApplicationController@changeStatus')->name('recurring-deposit-application.changeStatus')->middleware('can:status_recurring_deposit_application');
+
+
+    Route::match(['get','patch'],'recurring-deposit-scheme', 'RecurringDepositSchemeController@index')->name('recurring-deposit-scheme.index')->middleware('can:browse_recurring_deposit_scheme');
+    Route::get('recurring-deposit-scheme/create', 'RecurringDepositSchemeController@create')->name('recurring-deposit-scheme.create')->middleware('can:add_recurring_deposit_scheme');
+    Route::get('recurring-deposit-scheme/{scheme}', 'RecurringDepositSchemeController@show')->name('recurring-deposit-scheme.show')->middleware('can:read_recurring_deposit_scheme');
+    Route::get('recurring-deposit-scheme/{scheme}/edit', 'RecurringDepositSchemeController@edit')->name('recurring-deposit-scheme.edit')->middleware('can:edit_recurring_deposit_scheme');
+    Route::post('recurring-deposit-scheme', 'RecurringDepositSchemeController@store')->name('recurring-deposit-scheme.store')->middleware('can:add_recurring_deposit_scheme');
+    Route::put('recurring-deposit-scheme/{scheme}', 'RecurringDepositSchemeController@update')->name('recurring-deposit-scheme.update')->middleware('can:edit_recurring_deposit_scheme');
+    Route::delete('recurring-deposit-scheme/{scheme}', 'RecurringDepositSchemeController@destroy')->name('saving-account-scheme.destroy')->middleware('can:delete_recurring_deposit_scheme');
+
+
+    Route::match(['get','patch'],'recurring-deposit-account', 'RecurringDepositAccountController@index')->name('recurring-deposit-account.index')->middleware('can:browse_recurring_deposit_account');
+    Route::get('recurring-deposit-account/create', 'RecurringDepositAccountController@create')->name('recurring-deposit-account.create')->middleware('can:add_recurring_deposit_account');
+    Route::get('recurring-deposit-account/{recurring_deposit_account}', 'RecurringDepositAccountController@show')->name('recurring-deposit-account.show')->middleware('can:read_recurring_deposit_account');
+    Route::get('recurring-deposit-account/{recurring-deposit-account}/edit', 'RecurringDepositAccountController@edit')->name('recurring-deposit-account.edit')->middleware('can:edit_recurring_deposit_account');
+    Route::post('recurring-deposit-account', 'RecurringDepositAccountController@store')->name('recurring-deposit-account.store')->middleware('can:add_recurring_deposit_account');
+    Route::put('recurring-deposit-account/{recurring-deposit-account}', 'RecurringDepositAccountController@update')->name('recurring-deposit-account.update')->middleware('can:edit_recurring_deposit_account');
+    Route::delete('recurring-deposit-account/{recurring-deposit-account}', 'RecurringDepositAccountController@destroy')->name('recurring-deposit-account.destroy')->middleware('can:delete_recurring_deposit_account');
+
+
+
+
+
+
+
+    Route::match(['get','patch'],'fd-scheme', 'FdSchemeController@index')->name('fd-scheme.index')->middleware('can:browse_saving_account_scheme');
+    Route::get('fd-scheme/create', 'FdSchemeController@create')->name('fd-scheme.create')->middleware('can:add_fd_scheme');
+    Route::get('fd-scheme/{scheme}', 'FdSchemeController@show')->name('fd-scheme.show')->middleware('can:read_fd_scheme');
+    Route::get('fd-scheme/{scheme}/edit', 'FdSchemeController@edit')->name('fd-scheme.edit')->middleware('can:edit_fd_scheme');
+    Route::post('fd-scheme', 'FdSchemeController@store')->name('fd-scheme.store')->middleware('can:add_fd_scheme');
+    Route::put('fd-scheme/{scheme}', 'FdSchemeController@update')->name('fd-scheme.update')->middleware('can:edit_fd_scheme');
+    Route::delete('fd-scheme/{scheme}', 'FdSchemeController@destroy')->name('fd-scheme.destroy')->middleware('can:delete_fd_scheme');
+
+
+    Route::match(['get','patch'],'fd-account', 'FdAccountController@index')->name('fd-account.index')->middleware('can:browse_fd_account');
+    Route::get('fd-account/create', 'FdAccountController@create')->name('fd-account.create')->middleware('can:add_fd_account');
+    Route::get('fd-account/{saving_account}', 'FdAccountController@show')->name('fd-account.show')->middleware('can:read_fd_account');
+    Route::get('fd-account/{fd-account}/edit', 'FdAccountController@edit')->name('fd-account.edit')->middleware('can:edit_fd_account');
+    Route::post('fd-account', 'FdAccountController@store')->name('fd-account.store')->middleware('can:add_fd_account');
+    Route::put('fd-account/{fd-account}', 'FdAccountController@update')->name('fd-account.update')->middleware('can:edit_fd_account');
+    Route::delete('fd-account/{fd-account}', 'FdAccountController@destroy')->name('saving-account.destroy')->middleware('can:delete_fd_account');
+
+
+
+    //Accounts Details
+
+    Route::match(['get','patch'],'fd-application', 'FdAccountApplicationController@index')->name('fd-application.index')->middleware('can:browse_fd_account_application');
+    Route::get('fd-application/create', 'FdAccountapplicationController@create')->name('fd-application.create')->middleware('can:add_fd_account_application');
+    Route::get('fd-application/{application}', 'FdAccountapplicationController@show')->name('fd-application.show')->middleware('can:read_fd_account_application');
+    Route::get('fd-application/{application}/edit', 'FdAccountapplicationController@edit')->name('fd-application.edit')->middleware('can:edit_fd_account_application');
+    Route::post('fd-application', 'FdAccountapplicationController@store')->name('fd-application.store')->middleware('can:add_fd_account_application');
+    Route::put('fd-application/{application}', 'FdAccountapplicationController@update')->name('fd-application.update')->middleware('can:edit_fd_account_application');
+    Route::delete('fd-application/{application}', 'FdAccountapplicationController@destroy')->name('fd-application.destroy')->middleware('can:delete_fd_account_application');
+    Route::put('fd-application/change-status/status', 'FdAccountapplicationController@changeStatus')->name('fd-application.changeStatus')->middleware('can:status_fd_account_application');
+
+
+
+
+
+    Route::match(['get','patch'],'mis-scheme', 'MisSchemeController@index')->name('mis-scheme.index')->middleware('can:browse_saving_account_scheme');
+    Route::get('mis-scheme/create', 'MisSchemeController@create')->name('mis-scheme.create')->middleware('can:add_mis_scheme');
+    Route::get('mis-scheme/{scheme}', 'MisSchemeController@show')->name('mis-scheme.show')->middleware('can:read_mis_scheme');
+    Route::get('mis-scheme/{scheme}/edit', 'MisSchemeController@edit')->name('mis-scheme.edit')->middleware('can:edit_mis_scheme');
+    Route::post('mis-scheme', 'MisSchemeController@store')->name('mis-scheme.store')->middleware('can:add_mis_scheme');
+    Route::put('mis-scheme/{scheme}', 'MisSchemeController@update')->name('mis-scheme.update')->middleware('can:edit_mis_scheme');
+    Route::delete('mis-scheme/{scheme}', 'MisSchemeController@destroy')->name('mis-scheme.destroy')->middleware('can:delete_mis_scheme');
+
+
+    Route::match(['get','patch'],'mis-account', 'MisAccountController@index')->name('mis-account.index')->middleware('can:browse_mis_account');
+    Route::get('mis-account/create', 'MisAccountController@create')->name('mis-account.create')->middleware('can:add_mis_account');
+    Route::get('mis-account/{saving_account}', 'MisAccountController@show')->name('mis-account.show')->middleware('can:read_mis_account');
+    Route::get('mis-account/{mis-account}/edit', 'MisAccountController@edit')->name('mis-account.edit')->middleware('can:edit_mis_account');
+    Route::post('mis-account', 'MisAccountController@store')->name('mis-account.store')->middleware('can:add_mis_account');
+    Route::put('mis-account/{mis-account}', 'MisAccountController@update')->name('mis-account.update')->middleware('can:edit_mis_account');
+    Route::delete('mis-account/{mis-account}', 'MisAccountController@destroy')->name('saving-account.destroy')->middleware('can:delete_mis_account');
+
+
+
+    //Accounts Details
+
+    Route::match(['get','patch'],'mis-application', 'MisAccountApplicationController@index')->name('mis-application.index')->middleware('can:browse_mis_account_application');
+    Route::get('mis-application/create', 'MisAccountapplicationController@create')->name('mis-application.create')->middleware('can:add_mis_account_application');
+    Route::get('mis-application/{application}', 'MisAccountapplicationController@show')->name('mis-application.show')->middleware('can:read_mis_account_application');
+    Route::get('mis-application/{application}/edit', 'MisAccountapplicationController@edit')->name('mis-application.edit')->middleware('can:edit_mis_account_application');
+    Route::post('mis-application', 'MisAccountapplicationController@store')->name('mis-application.store')->middleware('can:add_mis_account_application');
+    Route::put('mis-application/{application}', 'MisAccountapplicationController@update')->name('mis-application.update')->middleware('can:edit_mis_account_application');
+    Route::delete('mis-application/{application}', 'MisAccountapplicationController@destroy')->name('mis-application.destroy')->middleware('can:delete_mis_account_application');
+    Route::put('mis-application/change-status/status', 'MisAccountapplicationController@changeStatus')->name('mis-application.changeStatus')->middleware('can:status_mis_account_application');
 
 
     

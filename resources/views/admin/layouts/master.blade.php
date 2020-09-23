@@ -641,6 +641,28 @@ $(document).ready(function() {
         }
     });
 });
+
+
+
+$(document).ready(function() {
+    $('.get_agent').select2({
+        delay : 200,
+        ajax: {
+            url: '/admin/common/agent/list',
+            dataType: 'json',
+            cache: true,
+            data: function(params) {
+              return {
+                  term: params.term || '',
+                  page: params.page || 1
+              }
+          },
+        }
+    });
+});
+
+
+
   </script>
 
 

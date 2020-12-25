@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\Route;
     Admin
 ===============
 */
-
+Route::get('/', function() {
+    return view('welcome');
+});
 
 Route::group(['namespace' => 'Admin','middleware' => 'admin.guest','prefix'=>'admin'], function() {
     Route::get('/', function() {
@@ -32,7 +34,7 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin.guest','prefix'=>'ad
     Route::post('login', 'Auth\LoginController@login')->name('admin.login.post');
 
     Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 
     Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('admin.password.reset');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin.password.request');

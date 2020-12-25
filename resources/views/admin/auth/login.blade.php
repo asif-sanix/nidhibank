@@ -41,20 +41,20 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
 
 
          <div class="col-xl-3 col-lg-5 col-md-6 col-sm-12 m-auto p-0">
-                     @if (isset($errors)&&count($errors) > 0)
-                            <div class="animated shake alert alert-dismissable alert-danger">
-                                 <ul class=" list-unstyled clearfix d-flex" style="margin: 0">
-                                @foreach ($errors->all() as $error)
-                                   <li><strong>{!! $error !!}</strong></li>
-                                @endforeach
-                            </ul>
-                            </div>
-                        @endif
-                   
-                </div>
+               @if (isset($errors)&&count($errors) > 0)
+                      <div class="animated shake alert alert-dismissable alert-danger">
+                           <ul class=" list-unstyled clearfix d-flex" style="margin: 0">
+                          @foreach ($errors->all() as $error)
+                             <li><strong>{!! $error !!}</strong></li>
+                          @endforeach
+                      </ul>
+                      </div>
+                  @endif
+             
+          </div>
 
 
-        <section class="col-xl-3 col-lg-5 col-md-6 col-sm-8 m-auto box-shadow-2">
+        <section class="col-xl-5 col-lg-6 col-md-6 col-sm-8 m-auto box-shadow-2">
 
 
           <div class="card border-grey border-lighten-3 px-2 py-2 row mb-0">
